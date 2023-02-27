@@ -15,7 +15,13 @@
           GestCapteurs
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <q-btn
+          to="/connexion"
+          flat
+          icon-right="account_circle"
+          label="Se connecter"
+          class="absolute-right"
+        />
       </q-toolbar>
     </q-header>
 
