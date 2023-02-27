@@ -12,7 +12,7 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          GestCapteurs
         </q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>
@@ -25,17 +25,47 @@
       bordered
     >
       <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
-
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
+        <q-item-label header>Menu de navigation</q-item-label>
+        <q-item clickable exact to="/">
+          <q-item-section avatar>
+            <q-icon name="home" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Accueil</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item clickable exact to="/">
+          <q-item-section avatar>
+            <q-icon name="person" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Utilisateurs</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item clickable exact to="/">
+          <q-item-section avatar>
+            <q-icon name="sensors" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Capteurs</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item clickable exact to="/">
+          <q-item-section avatar>
+            <q-icon name="room" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Salles</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item clickable exact to="/">
+          <q-item-section avatar>
+            <q-icon name="favorite" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Favoris</q-item-label>
+          </q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
 
@@ -47,7 +77,6 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
 
 const linksList = [
   {
@@ -98,7 +127,6 @@ export default defineComponent({
   name: 'MainLayout',
 
   components: {
-    EssentialLink
   },
 
   setup () {
