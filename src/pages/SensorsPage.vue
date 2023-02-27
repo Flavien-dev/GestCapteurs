@@ -1,5 +1,7 @@
 <template>
-
+  <q-page padding>
+    <h3>Capteurs</h3>
+  </q-page>
 </template>
 
 <script>

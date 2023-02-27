@@ -1,5 +1,7 @@
 <template>
-
+  <q-page padding>
+    <h3>Favoris</h3>
+  </q-page>
 </template>
 
 <script>

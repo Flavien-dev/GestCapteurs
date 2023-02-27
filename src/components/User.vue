@@ -1,12 +1,10 @@
 <template>
-  <q-page padding>
-    <h3>Salles</h3>
-  </q-page>
+
 </template>
 
 <script>
 export default {
-  name: 'RoomsPage.vue'
+  name: 'User'
 }
 </script>
 

@@ -34,7 +34,7 @@
             <q-item-label>Accueil</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item clickable exact to="/">
+        <q-item clickable exact to="/users">
           <q-item-section avatar>
             <q-icon name="person" />
           </q-item-section>
@@ -42,7 +42,7 @@
             <q-item-label>Utilisateurs</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item clickable exact to="/">
+        <q-item clickable exact to="/sensors">
           <q-item-section avatar>
             <q-icon name="sensors" />
           </q-item-section>
@@ -50,7 +50,7 @@
             <q-item-label>Capteurs</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item clickable exact to="/">
+        <q-item clickable exact to="/rooms">
           <q-item-section avatar>
             <q-icon name="room" />
           </q-item-section>
@@ -58,7 +58,7 @@
             <q-item-label>Salles</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item clickable exact to="/">
+        <q-item clickable exact to="/favorites">
           <q-item-section avatar>
             <q-icon name="favorite" />
           </q-item-section>
