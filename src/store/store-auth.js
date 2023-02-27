@@ -24,9 +24,21 @@ Actions : méthodes du magasin qui font appel aux mutations
 Elles peuvent être asynchrones !
  */
 const actions = {
+  enregistrerUtilisateur ({ commit }, payload) {
+    const that = this
+    api.post('/register', payload)
+      .then(function (response) {
+        commit('setUser', response.data.user)
+        commit('setToken', response.data.access_token)
+        that.$router.push('/')
+      })
+      .catch(function (error) {
+        console.log(error.response)
+      })
+  },
   connecterUtilisateur ({ commit }, payload) {
     const that = this
-    api.post('http://tempapi.divtec.me/api/login', payload)
+    api.post('/login', payload)
       .then(function (response) {
         commit('setUser', response.data.user)
         commit('setToken', response.data.access_token)

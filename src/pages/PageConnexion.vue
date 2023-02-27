@@ -17,13 +17,11 @@
 
       <q-tab-panels v-model="tab" animated>
         <q-tab-panel name="connexion">
-          <div class="text-h6">Se connecter</div>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          <cnx-form/>
         </q-tab-panel>
 
         <q-tab-panel name="enregistrement">
-          <div class="text-h6">Créer un compte</div>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          <crt-form/>
         </q-tab-panel>
       </q-tab-panels>
     </q-card>
@@ -37,6 +35,10 @@ export default {
     return {
       tab: 'connexion'
     }
+  },
+  components: {
+    'cnx-form': require('components/Connexion/ConnexionForm').default,
+    'crt-form': require('components/Connexion/EnregistrementForm').default
   }
 }
 </script>
