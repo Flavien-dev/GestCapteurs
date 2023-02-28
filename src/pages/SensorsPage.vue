@@ -2,7 +2,6 @@
   <q-page padding>
     <h3>Capteurs</h3>
     <q-list
-      v-if="sensors.length"
       class="rounded-borders"
       bordered
       separator
@@ -13,7 +12,6 @@
         :sensor="sensor"
       />
     </q-list>
-    <p v-else>Pas de capteurs</p>
   </q-page>
 </template>
 
@@ -35,8 +33,6 @@ export default {
   },
   // Après que le composant soit construit
   mounted () {
-    // Exécute l'action getClientsApi() du magasin Client
-    // qui va récupérer les données de l'API et les ajoute au magasin client
     this.getSensorsApi()
   }
 }

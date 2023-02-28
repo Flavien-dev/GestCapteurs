@@ -16,10 +16,20 @@
         </q-toolbar-title>
 
         <q-btn
+          v-if="!user"
           to="/connexion"
           flat
           icon-right="account_circle"
           label="Se connecter"
+          class="absolute-right"
+        />
+
+        <q-btn
+          v-else
+          @click="deconnecterUtilisateur"
+          flat
+          icon-right="account_circle"
+          label="Se déconnecter"
           class="absolute-right"
         />
       </q-toolbar>
@@ -64,6 +74,14 @@
             <q-item-label>Salles</q-item-label>
           </q-item-section>
         </q-item>
+        <q-item clickable exact to="/measures">
+          <q-item-section avatar>
+            <q-icon name="thermostat" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Mesures</q-item-label>
+          </q-item-section>
+        </q-item>
         <q-item clickable exact to="/favorites">
           <q-item-section avatar>
             <q-icon name="favorite" />
@@ -83,6 +101,7 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
+import { mapState, mapActions } from 'vuex'
 
 const linksList = [
   {
@@ -133,6 +152,13 @@ export default defineComponent({
   name: 'MainLayout',
 
   components: {
+  },
+
+  computed: {
+    ...mapState('auth', ['user'])
+  },
+  methods: {
+    ...mapActions('auth', ['deconnecterUtilisateur'])
   },
 
   setup () {

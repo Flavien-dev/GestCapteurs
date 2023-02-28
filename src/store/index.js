@@ -2,6 +2,8 @@ import { store } from 'quasar/wrappers'
 import { createStore } from 'vuex'
 
 import sensors from './store-capteurs'
+import rooms from './store-rooms'
+import measures from './store-mesures'
 import auth from './store-auth'
 
 // import example from './module-example'
@@ -19,6 +21,8 @@ export default store(function (/* { ssrContext } */) {
   const Store = createStore({
     modules: {
       sensors,
+      rooms,
+      measures,
       auth
     },
 

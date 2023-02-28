@@ -1,4 +1,5 @@
 import { api } from 'boot/axios'
+import { Loading, LocalStorage } from 'quasar'
 
 // State : données du magasin
 const state = {
@@ -24,13 +25,10 @@ Actions : méthodes du magasin qui font appel aux mutations
 Elles peuvent être asynchrones !
  */
 const actions = {
-  enregistrerUtilisateur ({ commit }, payload) {
-    const that = this
+  enregistrerUtilisateur ({ commit, dispatch }, payload) {
     api.post('/register', payload)
       .then(function (response) {
-        commit('setUser', response.data.user)
-        commit('setToken', response.data.access_token)
-        that.$router.push('/')
+        dispatch('setUser', response.data)
       })
       .catch(function (error) {
         console.log(error.response)
@@ -45,12 +43,43 @@ const actions = {
         console.log(error)
       })
   },
-  setUser ({ commit, dispatch }, data) {
-    // Sauvegarde les données de l'utilisater et le token dans le magasin
+  setUser ({ commit, dispatch, state }, data) {
+    // Sauvegarde, commite, les données dans le magasin
     commit('setUser', data.user)
     commit('setToken', data.access_token)
+    // Sauvegarde les données de l'utilisateur dans le localStorage
+    LocalStorage.set('user', state.user)
+    LocalStorage.set('token', state.token)
+    // Récupération des capteurs
+    dispatch('sensors/getSensorsApi', null, { root: true })
     // Redirige l'utilisateur vers la page des tâches
-    this.$router.push('/sensors')
+    this.$router.push('/')
+    // Cache la fenêtre de chargement
+    Loading.hide()
+  },
+  deconnecterUtilisateur ({ commit, state }) {
+    Loading.show()
+    const that = this
+    // Configuration du header avec token
+    const config = {
+      headers: { Authorization: 'Bearer ' + state.token }
+    }
+    // Déconnexion de l'API
+    api.post('/logout', {}, config)
+      .catch(function (error) {
+        throw error
+      })
+      .finally(function () {
+        // Réinitialise user et token
+        commit('setUser', null)
+        commit('setToken', null)
+        // Vide le locaStorage
+        LocalStorage.clear()
+        // Redirige l'utilisateur vers la page de connexion
+        that.$router.push('/')
+        // location.reload() // recharge la page du navigateur
+        Loading.hide()
+      })
   }
 }
 

@@ -1,30 +1,22 @@
 <template>
   <q-item clickable exact to="/">
     <q-item-section>
-      <q-icon name="sensors" />
+      <q-icon name="room" />
     </q-item-section>
     <q-item-section>
       <q-item-label lines="1">
-        {{ sensor.nom }}
+        {{ room.nom }}
       </q-item-label>
-    </q-item-section>
-    <q-item-section>
-      <q-item-label>
-        Salle : {{ sensor.salle.nom }}
-      </q-item-label>
-    </q-item-section>
-    <q-item-section>
-      Nombre de mesure : {{ sensor.mesures.length }}
     </q-item-section>
   </q-item>
 </template>
 
 <script>
 export default {
-  name: 'Sensor',
+  name: 'Room.vue',
   props: {
     // La propriété client est obligatoire et doit être de type Object
-    sensor: {
+    room: {
       type: Object,
       required: true
     }

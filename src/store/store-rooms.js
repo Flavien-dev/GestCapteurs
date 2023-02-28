@@ -5,7 +5,7 @@ import { api } from 'boot/axios'
 // State : données du magasin
 const state = {
   // Tableau des clients
-  sensors: []
+  rooms: []
 }
 
 /*
@@ -14,12 +14,12 @@ Les mutations ne peuvent pas être asynchrones !!!
  */
 const mutations = {
   /**
-   * Remplace la liste des capteurs par le nouveau tableau newSensors en paramètres
-   * @param state liste des capteurs actuels
-   * @param newSensors nouvelle liste des capteurs
+   * Remplace la liste des salles par le nouveau tableau newRooms en paramètres
+   * @param state liste des salles actuelles
+   * @param newRooms nouvelle liste des salles
    */
-  SET_SENSORS (state, newSensors) {
-    state.sensors = newSensors
+  SET_ROOMS (state, newRooms) {
+    state.rooms = newRooms
   }
 }
 /*
@@ -27,15 +27,15 @@ Actions : méthodes du magasin qui font appel aux mutations
 Elles peuvent être asynchrones !
  */
 const actions = {
-  getSensorsApi ({ commit, rootState }) {
+  getRoomsApi ({ commit, rootState }) {
     const config = {
       headers: { Authorization: 'Bearer ' + rootState.auth.token }
     }
     // GET
-    api.get('/capteurs', config)
+    api.get('/salles', config)
       // En cas de succès met à jour le tableau des clients du magasin
       .then(function (response) {
-        commit('SET_SENSORS', response.data)
+        commit('SET_ROOMS', response.data)
       })
       // En cas d'erreur, stoppe le script et affiche le message dans la console
       .catch(function (error) {
@@ -52,8 +52,8 @@ Sert à calculer, trier, filtrer ou formater les donneés
 const getters = {
 
   // Retourne le tableau des clients du magasin trié sur le prénom du client
-  getSensors: function (state) {
-    return state.sensors
+  getRooms: function (state) {
+    return state.rooms
 
     /* Tableau trié par nom et prénom
     return state.clients.sort(
