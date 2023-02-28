@@ -2,7 +2,7 @@ import { boot } from 'quasar/wrappers'
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'https://todo.kode.ch/api',
+  baseURL: 'http://tempapi.divtec.me/api',
   timeout: 3000,
   headers: {
     Accept: 'application/json',

@@ -36,17 +36,21 @@ const actions = {
         console.log(error.response)
       })
   },
-  connecterUtilisateur ({ commit }, payload) {
-    const that = this
+  connecterUtilisateur ({ commit, dispatch }, payload) {
     api.post('/login', payload)
       .then(function (response) {
-        commit('setUser', response.data.user)
-        commit('setToken', response.data.access_token)
-        that.$router.push('/')
+        dispatch('setUser', response.data)
       })
       .catch(function (error) {
-        console.log(error.response)
+        console.log(error)
       })
+  },
+  setUser ({ commit, dispatch }, data) {
+    // Sauvegarde les données de l'utilisater et le token dans le magasin
+    commit('setUser', data.user)
+    commit('setToken', data.access_token)
+    // Redirige l'utilisateur vers la page des tâches
+    this.$router.push('/sensors')
   }
 }
 
