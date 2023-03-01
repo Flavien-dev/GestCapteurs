@@ -1,38 +1,72 @@
 // State : données du magasin
+import { Loading } from 'quasar'
+import { api } from 'boot/axios'
+
 const state = {
-  plats: []
+  account: []
 }
 
-const getters = {}
+const getters = {
+  getAccount: function (state) {
+    return state.account
+
+    /* Tableau trié par nom et prénom
+    return state.clients.sort(
+      (a, b) => (a.name.last + a.name.first)
+        .localeCompare((b.name.last + b.name.first), 'fr')
+    )
+    */
+  }
+}
 
 const mutations = {
-  /**
-   * modifie le plat au magasin
-   * @param state le magasin
-   * @param payload les anciennes données du magasin
-   * @constructor
-   */
-  MODIFIER_PLAT (state, payload) {
-    // Recherche le plat et retourne sa position dans le tableau, son index
-    const index = state.plats.findIndex(el => el.id === payload.id)
+  SET_ACCOUNT (state, newAccount) {
+    state.account = newAccount
+  },
+  MODIFIER_MDP (state, payload) {
+    // Recherche la tâche et retourne sa position dans le tableau, son index
+    const index = state.account.findIndex(el => el.id === payload.id)
 
-    // Si un plat a été trouvée
+    // Si une tâche a été trouvée
     if (index !== -1) {
       // Modifie l'objet trouvé avec les nouvelles valeurs
-      Object.assign(state.plats[index], payload.updates)
+      Object.assign(state.account[index], payload.updates)
     }
   }
 }
 
 const actions = {
-  /**
-   * modifie un plat en changeant ses anciennes données
-   * @param commit action à effectuer
-   * @param payload anciennes données
-   */
-  modifierPlat ({ commit }, payload) {
-    // Valide la mutation et y passe les données
-    commit('MODIFIER_PLAT', payload)
+  getAccountApi ({ commit, payload }) {
+    api.post('/me', payload)
+      .then(function (response) {
+        commit('setUser', response.data.user)
+        commit('setToken', response.data.access_token)
+      })
+      .catch(function (error) {
+        console.log(error.response)
+      })
+  },
+  viderAccount ({ commit }) {
+    commit('SET_ACCOUNT', [])
+  },
+  modifierMDP ({ commit, rootState }, payload) {
+    Loading.show()
+    // Configuration du header avec token
+    const config = {
+      headers: { Authorization: 'Bearer ' + rootState.auth.token }
+    }
+
+    // modifie une tâche dans l'API
+    api.put('/updateme', payload.updates, config)
+      .then(function (response) {
+        // Affecte au payload les données retrounée par l'API
+        payload.updates = response.data
+        commit('MODIFIER_MDP', payload)
+      })
+      .catch(function (error) {
+        throw error
+      })
+      .finally(Loading.hide())
   }
 }
 

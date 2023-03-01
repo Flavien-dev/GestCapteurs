@@ -15,7 +15,7 @@
 export default {
   name: 'Room.vue',
   props: {
-    // La propriété client est obligatoire et doit être de type Object
+    // La propriété room est obligatoire et doit être de type Object
     room: {
       type: Object,
       required: true

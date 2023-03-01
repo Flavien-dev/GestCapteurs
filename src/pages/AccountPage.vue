@@ -1,30 +1,59 @@
 <template>
   <q-page padding>
     <h3>Compte</h3>
-    <h6>
-      Nom :
-    </h6>
-    <h6>
-      Prénom :
-    </h6>
-    <h6>
-      Email :
-    </h6>
-    <h6>
-      Mot de passe :
-    </h6>
-    <q-btn
-      type="submit"
-      color="primary"
-      label="Modifier le mot de passe"
-    />
+    <q-card
+      class="card">
+
+      <q-card-section>
+        <div>
+          <p>Nom : {{ user.nom }}</p>
+          <p>Prénom : {{ user.prenom }}</p>
+          <p>Email : {{ user.email }}</p>
+          <p>Mot de passe : {{ user.password }}</p>
+          <q-btn
+            @click="afficherFormMDP = true"
+            label="Modifier le mot de passe"
+            color="primary"
+            v-close-popup/>
+        </div>
+      </q-card-section>
+
+      <q-dialog
+        v-model="afficherFormMDP">
+        <form-mdp
+          :mdpAModifier="user.password"
+          @close="afficherFormPlat = false"/>
+      </q-dialog>
+    </q-card>
   </q-page>
 </template>
 
 <script>
 
+import { mapActions, mapState } from 'vuex'
+
 export default {
-  name: 'UsersPage.vue'
+  name: 'AccountPage.vue',
+  data () {
+    return {
+      afficherFormMDP: false
+    }
+  },
+  components: {
+    'form-mdp': require('components/changeMDP.vue').default
+  },
+  computed: {
+    account () {
+      return this.$store.getters['account/getAccount']
+    },
+    ...mapState('auth', ['user'])
+  },
+  methods: {
+    ...mapActions('account', ['getAccountApi'])
+  },
+  mounted () {
+    this.getAccountApi()
+  }
 }
 </script>
 
