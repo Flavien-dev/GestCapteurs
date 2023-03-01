@@ -26,7 +26,7 @@ Elles peuvent être asynchrones !
  */
 const actions = {
   enregistrerUtilisateur ({ commit, dispatch }, payload) {
-    api.post('/register', payload)
+    api.post('/newuser', payload)
       .then(function (response) {
         dispatch('setUser', response.data)
       })

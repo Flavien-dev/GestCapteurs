@@ -2,7 +2,15 @@
   <q-form @submit.prevent="submitForm">
     <q-input
       outlined
-      v-model="form.name"
+      v-model="form.first_name"
+      label="Prénom d'utilisateur"
+      class="q-my-md"
+      :rules="[ val => val.length >= 4 || 'Minimum 4 caractère']"
+    />
+
+    <q-input
+      outlined
+      v-model="form.last_name"
       label="Nom d'utilisateur"
       class="q-my-md"
       :rules="[ val => val.length >= 4 || 'Minimum 4 caractère']"
@@ -25,18 +33,7 @@
       :rules="[ val => val.length >= 4 || 'Minimum 4 caractère']"
       lazy-rules
     />
-
-    <q-input
-      type="password"
-      outlined
-      v-model="form.password_confirmation"
-      label="Confirmer le mot de passe"
-      class="q-my-md"
-      :rules="[ val => val === form.password || 'Les mots de passe sont différents']"
-      lazy-rules
-    />
-
-    <q-btn
+    <q-btn clickable exact to="/"
       type="submit"
       color="primary"
       label="Créer un compte"
@@ -51,10 +48,11 @@ export default {
   data () {
     return {
       form: {
-        name: '',
+        first_name: '',
+        last_name: '',
         email: '',
         password: '',
-        password_confirmation: ''
+        is_Admin: '0'
       }
     }
   },
