@@ -76,7 +76,7 @@
         </q-item>
         <q-item clickable exact to="/favorites">
           <q-item-section avatar>
-            <q-icon name="favorite" />
+            <q-icon name="star" />
           </q-item-section>
           <q-item-section>
             <q-item-label>Favoris</q-item-label>
@@ -142,10 +142,13 @@ const linksList = [
 
 export default defineComponent({
   name: 'MainLayout',
-
+  data () {
+    return {
+      isAdmin: false
+    }
+  },
   components: {
   },
-
   computed: {
     ...mapState('auth', ['user'])
   },

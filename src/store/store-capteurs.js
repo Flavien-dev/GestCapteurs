@@ -41,6 +41,9 @@ const actions = {
       .catch(function (error) {
         throw error
       })
+  },
+  viderSensors ({ commit }) {
+    commit('SET_SENSORS', [])
   }
 }
 

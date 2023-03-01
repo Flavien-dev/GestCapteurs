@@ -41,6 +41,9 @@ const actions = {
       .catch(function (error) {
         throw error
       })
+  },
+  viderRooms ({ commit }) {
+    commit('SET_ROOMS', [])
   }
 }
 

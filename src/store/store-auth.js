@@ -55,8 +55,7 @@ const actions = {
     // Cache la fenêtre de chargement
     Loading.hide()
   },
-  deconnecterUtilisateur ({ commit, state }) {
-    Loading.show()
+  deconnecterUtilisateur ({ commit, state, dispatch }) {
     const that = this
     // Configuration du header avec token
     const config = {
@@ -73,6 +72,9 @@ const actions = {
         commit('setToken', null)
         // Vide le locaStorage
         LocalStorage.clear()
+        // Vider les listes des différentes pages lors de la déconnexion
+        dispatch('sensors/viderSensors', null, { root: true })
+        dispatch('rooms/viderRooms', null, { root: true })
         // Redirige l'utilisateur vers la page de connexion
         that.$router.push('/')
         // location.reload() // recharge la page du navigateur

@@ -1,5 +1,5 @@
 <template>
-  <q-item clickable @click="afficherListe = !afficherListe">
+  <q-item>
     <q-item-section>
       <q-icon name="sensors" />
     </q-item-section>
@@ -13,12 +13,36 @@
         Salle : {{ sensor.salle.nom }}
       </q-item-label>
     </q-item-section>
-    <q-item-label v-if="afficherListe">
-      <q-icon name="north" />
-    </q-item-label>
-    <q-item-label v-else>
-      <q-icon name="south" />
-    </q-item-label>
+    <q-item-section side>
+      <q-btn v-if="ajouterFavoris"
+        @click="ajouterFavoris = !ajouterFavoris"
+        dense
+        flat
+        round
+        color="primary"
+        icon="star" />
+      <q-btn v-else
+        @click="ajouterFavoris = !ajouterFavoris"
+        dense
+        flat
+        round
+        color="primary"
+        icon="star_border" />
+    </q-item-section>
+    <q-item-section side>
+      <q-btn v-if="afficherListe"
+             @click="afficherListe = !afficherListe"
+             dense
+             flat
+             round
+             icon="north" />
+      <q-btn v-else
+             @click="afficherListe = !afficherListe"
+             dense
+             flat
+             round
+             icon="south" />
+    </q-item-section>
   </q-item>
   <div v-if="afficherListe">
     <q-item v-for="mesure in sensor.mesures" :key="mesure.id" :mesure="mesure">
@@ -54,7 +78,8 @@ export default {
   name: 'Sensor',
   data () {
     return {
-      afficherListe: false
+      afficherListe: false,
+      ajouterFavoris: false
     }
   },
   props: {
