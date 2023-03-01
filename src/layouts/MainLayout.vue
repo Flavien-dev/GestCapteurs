@@ -50,12 +50,12 @@
             <q-item-label>Accueil</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item clickable exact to="/users">
+        <q-item clickable exact to="/account">
           <q-item-section avatar>
             <q-icon name="person" />
           </q-item-section>
           <q-item-section>
-            <q-item-label>Utilisateurs</q-item-label>
+            <q-item-label>Compte</q-item-label>
           </q-item-section>
         </q-item>
         <q-item clickable exact to="/sensors">
@@ -74,7 +74,7 @@
             <q-item-label>Salles</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item clickable exact to="/favorites">
+        <q-item clickable v-if="user" exact to="/favorites">
           <q-item-section avatar>
             <q-icon name="star" />
           </q-item-section>
