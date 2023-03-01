@@ -2,6 +2,7 @@
   <q-page padding>
     <h3>Mesures</h3>
     <q-list
+      v-if="measures.length"
       class="rounded-borders"
       bordered
       separator
@@ -12,12 +13,13 @@
         :measure="measure"
       />
     </q-list>
+    <p v-else>Pas de mesures...</p>
   </q-page>
 </template>
 
 <script>
-import Measure from 'components/Measure.vue'
 import { mapActions } from 'vuex'
+import Measure from 'components/Measure.vue'
 
 export default {
   name: 'MeasuresPage.vue',

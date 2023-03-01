@@ -50,8 +50,6 @@ const actions = {
     // Sauvegarde les données de l'utilisateur dans le localStorage
     LocalStorage.set('user', state.user)
     LocalStorage.set('token', state.token)
-    // Récupération des capteurs
-    dispatch('sensors/getSensorsApi', null, { root: true })
     // Redirige l'utilisateur vers la page des tâches
     this.$router.push('/')
     // Cache la fenêtre de chargement

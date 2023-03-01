@@ -32,7 +32,7 @@ const actions = {
       headers: { Authorization: 'Bearer ' + rootState.auth.token }
     }
     // GET
-    api.get('/mesures', config)
+    api.get('/capteurs', config)
       // En cas de succès met à jour le tableau des clients du magasin
       .then(function (response) {
         commit('SET_MEASURES', response.data)

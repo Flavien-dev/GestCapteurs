@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'Measure',
+  name: 'Measure.vue',
   props: {
     // La propriété client est obligatoire et doit être de type Object
     measure: {

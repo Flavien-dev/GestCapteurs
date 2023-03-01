@@ -74,14 +74,6 @@
             <q-item-label>Salles</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item clickable exact to="/measures">
-          <q-item-section avatar>
-            <q-icon name="thermostat" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Mesures</q-item-label>
-          </q-item-section>
-        </q-item>
         <q-item clickable exact to="/favorites">
           <q-item-section avatar>
             <q-icon name="favorite" />
