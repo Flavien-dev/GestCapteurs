@@ -82,6 +82,14 @@
             <q-item-label>Favoris</q-item-label>
           </q-item-section>
         </q-item>
+        <q-item clickable exact to="/users">
+          <q-item-section avatar>
+            <q-icon name="Groups" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Users</q-item-label>
+          </q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
 

@@ -26,9 +26,13 @@ Elles peuvent être asynchrones !
  */
 const actions = {
   enregistrerUtilisateur ({ commit, dispatch }, payload) {
+    const that = this
     api.post('/newuser', payload)
       .then(function (response) {
-        dispatch('setUser', response.data)
+        commit('setUser', response.data.user)
+        commit('setToken', response.data.access_token)
+        console.log(response)
+        that.$router.push('/')
       })
       .catch(function (error) {
         console.log(error.response)

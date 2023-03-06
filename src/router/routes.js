@@ -10,7 +10,8 @@ const routes = [
       { path: 'rooms', component: () => import('pages/RoomsPage.vue') },
       { path: 'favorites', component: () => import('pages/FavoritesPage.vue') },
       { path: 'connexion', component: () => import('pages/PageConnexion.vue') },
-      { path: 'measures', component: () => import('pages/MeasuresPage.vue') }
+      { path: 'measures', component: () => import('pages/MeasuresPage.vue') },
+      { path: 'users', component: () => import('pages/UsersPage.vue') }
     ]
   },
 

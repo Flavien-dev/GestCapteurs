@@ -5,7 +5,7 @@
       v-model="form.first_name"
       label="Prénom d'utilisateur"
       class="q-my-md"
-      :rules="[ val => val.length >= 4 || 'Minimum 4 caractère']"
+      :rules="[ val => val.length >= 2 || 'Minimum 2 caractère']"
     />
 
     <q-input
@@ -33,7 +33,7 @@
       :rules="[ val => val.length >= 4 || 'Minimum 4 caractère']"
       lazy-rules
     />
-    <q-btn clickable exact to="/"
+    <q-btn
       type="submit"
       color="primary"
       label="Créer un compte"
@@ -44,7 +44,7 @@
 <script>
 import { mapActions } from 'vuex'
 export default {
-  name: 'EnregistrementForm',
+  name: 'EnregistrementForm.vue',
   data () {
     return {
       form: {
@@ -52,7 +52,7 @@ export default {
         last_name: '',
         email: '',
         password: '',
-        is_Admin: '0'
+        is_Admin: 0
       }
     }
   },
