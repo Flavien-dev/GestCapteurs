@@ -82,17 +82,35 @@
             <q-item-label>Favoris</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item clickable exact to="/users">
+      </q-list>
+      <q-list v-if="user">
+        <q-item-label header>Admin</q-item-label>
+        <q-item clickable exact to="/connexion">
           <q-item-section avatar>
-            <q-icon name="Groups" />
+            <q-icon name="manage_accounts" />
           </q-item-section>
           <q-item-section>
-            <q-item-label>Users</q-item-label>
+            <q-item-label>Gestion utilisateurs</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item clickable exact to="/connexion">
+          <q-item-section avatar>
+            <q-icon name="settings" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Gestion capteurs</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item clickable exact to="/connexion">
+          <q-item-section avatar>
+            <q-icon name="room_preferences" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Gestion salles</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
     </q-drawer>
-
     <q-page-container>
       <router-view />
     </q-page-container>

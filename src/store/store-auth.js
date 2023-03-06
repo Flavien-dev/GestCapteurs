@@ -42,6 +42,7 @@ const actions = {
     api.post('/login', payload)
       .then(function (response) {
         dispatch('setUser', response.data)
+        console.log(response)
       })
       .catch(function (error) {
         console.log(error)

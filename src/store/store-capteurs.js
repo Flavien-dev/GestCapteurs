@@ -1,6 +1,7 @@
 /* eslint-disable quote-props,quotes */
 // Importation d'Axios sous le nom api
 import { api } from 'boot/axios'
+import { Loading, LocalStorage } from "quasar"
 
 // State : données du magasin
 const state = {
@@ -44,6 +45,16 @@ const actions = {
   },
   viderSensors ({ commit }) {
     commit('SET_SENSORS', [])
+  },
+  setSensor ({ commit, dispatch, state }, data) {
+    // Sauvegarde, commite, les données dans le magasin
+    commit('setUser', data.user)
+    // Sauvegarde les données de l'utilisateur dans le localStorage
+    LocalStorage.set('user', state.user)
+    // Redirige l'utilisateur vers la page des tâches
+    this.$router.push('/')
+    // Cache la fenêtre de chargement
+    Loading.hide()
   }
 }
 

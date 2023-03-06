@@ -5,6 +5,7 @@ import sensors from './store-capteurs'
 import rooms from './store-rooms'
 import measures from './store-mesures'
 import account from './store-account'
+import favorites from './store-favorites'
 import auth from './store-auth'
 
 // import example from './module-example'
@@ -25,6 +26,7 @@ export default store(function (/* { ssrContext } */) {
       rooms,
       measures,
       account,
+      favorites,
       auth
     },
 
