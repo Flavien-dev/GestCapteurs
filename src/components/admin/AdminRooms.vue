@@ -8,6 +8,20 @@
         {{ room.nom }}
       </q-item-label>
     </q-item-section>
+    <q-item-label>
+      <q-btn
+        dense
+        flat
+        round
+        color="primary"
+        icon="edit" />
+      <q-btn
+        dense
+        flat
+        round
+        color="negative"
+        icon="delete" />
+    </q-item-label>
   </q-item>
 </template>
 

@@ -10,7 +10,6 @@
         narrow-indicator
       >
         <q-tab name="connexion" label="Se connecter" />
-        <q-tab name="enregistrement" label="Créer un compte" />
       </q-tabs>
 
       <q-separator />
@@ -18,10 +17,6 @@
       <q-tab-panels v-model="tab" animated>
         <q-tab-panel name="connexion">
           <cnx-form/>
-        </q-tab-panel>
-
-        <q-tab-panel name="enregistrement">
-          <crt-form/>
         </q-tab-panel>
       </q-tab-panels>
     </q-card>
@@ -37,8 +32,7 @@ export default {
     }
   },
   components: {
-    'cnx-form': require('components/Connexion/ConnexionForm').default,
-    'crt-form': require('components/Connexion/EnregistrementForm').default
+    'cnx-form': require('components/Connexion/ConnexionForm').default
   }
 }
 </script>

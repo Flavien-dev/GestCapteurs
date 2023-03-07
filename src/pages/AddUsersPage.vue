@@ -4,7 +4,7 @@
     <q-form>
       <q-input
         outlined
-        v-model="form.first_name"
+        v-model="form.prenom"
         label="Prénom d'utilisateur"
         class="q-my-md"
         :rules="[ val => val.length >= 2 || 'Minimum 2 caractère']"
@@ -12,7 +12,7 @@
 
       <q-input
         outlined
-        v-model="form.last_name"
+        v-model="form.nom"
         label="Nom d'utilisateur"
         class="q-my-md"
         :rules="[ val => val.length >= 4 || 'Minimum 4 caractère']"
@@ -53,8 +53,8 @@ export default {
   data () {
     return {
       form: {
-        first_name: '',
-        last_name: '',
+        prenom: '',
+        nom: '',
         email: '',
         password: '',
         is_Admin: 0

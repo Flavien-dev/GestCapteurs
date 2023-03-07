@@ -1,6 +1,7 @@
 /* eslint-disable quote-props,quotes */
 // Importation d'Axios sous le nom api
 import { api } from 'boot/axios'
+import { Loading } from "quasar"
 
 // State : données du magasin
 const state = {
@@ -20,6 +21,10 @@ const mutations = {
    */
   SET_ROOMS (state, newRooms) {
     state.rooms = newRooms
+  },
+  AJOUTER_SALLE (state, salle) {
+    // Ajout de la tâche à fin du tableau
+    state.rooms.push(salle)
   }
 }
 /*
@@ -27,6 +32,25 @@ Actions : méthodes du magasin qui font appel aux mutations
 Elles peuvent être asynchrones !
  */
 const actions = {
+  ajouterSalle ({ commit, rootState }, room) {
+    Loading.show()
+    // Configuration du header avec token
+    const config = {
+      headers: { Authorization: 'Bearer ' + rootState.auth.token }
+    }
+
+    // ajoute la tâche dans l'API
+    api.post('/salles', room, config)
+      .then(function (response) {
+        // Ajoute la tache retournée par l'API au magasin
+        commit('AJOUTER_SALLE', response.data)
+      })
+      .catch(function (error) {
+        console.log(error)
+        throw error
+      })
+      .finally(Loading.hide())
+  },
   getRoomsApi ({ commit, rootState }) {
     const config = {
       headers: { Authorization: 'Bearer ' + rootState.auth.token }

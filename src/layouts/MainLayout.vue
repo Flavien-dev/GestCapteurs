@@ -50,7 +50,7 @@
             <q-item-label>Accueil</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item clickable exact to="/account">
+        <q-item clickable v-if="user" exact to="/account">
           <q-item-section avatar>
             <q-icon name="person" />
           </q-item-section>
@@ -58,7 +58,7 @@
             <q-item-label>Compte</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item clickable exact to="/sensors">
+        <q-item clickable v-if="user" exact to="/sensors">
           <q-item-section avatar>
             <q-icon name="sensors" />
           </q-item-section>
@@ -66,7 +66,7 @@
             <q-item-label>Capteurs</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item clickable exact to="/rooms">
+        <q-item clickable v-if="user" exact to="/rooms">
           <q-item-section avatar>
             <q-icon name="room" />
           </q-item-section>
@@ -83,33 +83,35 @@
           </q-item-section>
         </q-item>
       </q-list>
-      <q-list v-if="user">
-        <q-item-label header>Admin</q-item-label>
-        <q-item clickable exact to="/manage-users">
-          <q-item-section avatar>
-            <q-icon name="manage_accounts" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Gestion utilisateurs</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item clickable exact to="/manage-sensors">
-          <q-item-section avatar>
-            <q-icon name="settings" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Gestion capteurs</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item clickable exact to="/manage-rooms">
-          <q-item-section avatar>
-            <q-icon name="room_preferences" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Gestion salles</q-item-label>
-          </q-item-section>
-        </q-item>
-      </q-list>
+      <div v-if="user">
+        <q-list v-if="user.is_admin">
+          <q-item-label header>Admin</q-item-label>
+          <q-item clickable exact to="/manage-users">
+            <q-item-section avatar>
+              <q-icon name="manage_accounts" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Gestion utilisateurs</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item clickable exact to="/manage-sensors">
+            <q-item-section avatar>
+              <q-icon name="settings" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Gestion capteurs</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item clickable exact to="/manage-rooms">
+            <q-item-section avatar>
+              <q-icon name="room_preferences" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Gestion salles</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </div>
     </q-drawer>
     <q-page-container>
       <router-view />

@@ -1,6 +1,12 @@
 <template>
   <q-page padding>
     <h3>Salles</h3>
+    <q-btn
+      @click="afficheFormNewRoom = true"
+      label="Ajouter une nouvelle salle"
+      color="primary"
+      v-close-popup/>
+    <p></p>
     <q-list
       v-if="rooms.length"
       class="rounded-borders"
@@ -14,6 +20,10 @@
       />
     </q-list>
     <p v-else>Pas de salles...</p>
+    <q-dialog
+      v-model="afficheFormNewRoom">
+      <form-new-room @close="afficheFormNewRoom = false"/>
+    </q-dialog>
   </q-page>
 </template>
 
@@ -23,7 +33,15 @@ import Room from 'components/admin/AdminRooms.vue'
 
 export default {
   name: 'ManageRoomsPage.vue',
-  components: { Room },
+  components: {
+    Room,
+    'form-new-room': require('components/action/creeSalle.vue').default
+  },
+  data () {
+    return {
+      afficheFormNewRoom: false
+    }
+  },
   computed: {
     rooms () {
       return this.$store.getters['rooms/getRooms']

@@ -40,7 +40,7 @@ export default {
     }
   },
   components: {
-    'form-mdp': require('components/changeMDP.vue').default
+    'form-mdp': require('components/action/changeMDP.vue').default
   },
   computed: {
     account () {

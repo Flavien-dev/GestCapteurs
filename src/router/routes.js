@@ -17,7 +17,8 @@ const routes = [
       { path: 'manage-sensors', component: () => import('pages/admin/ManageSensorsPage.vue') },
       { path: 'manage-rooms', component: () => import('pages/admin/ManageRoomsPage.vue') },
 
-      { path: 'add-user', component: () => import('pages/AddUsersPage.vue') }
+      { path: 'add-user', component: () => import('pages/AddUsersPage.vue') },
+      { path: 'add-room', component: () => import('pages/AddUsersPage.vue') }
     ]
   },
 
