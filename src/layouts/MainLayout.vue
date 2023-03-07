@@ -85,7 +85,7 @@
       </q-list>
       <q-list v-if="user">
         <q-item-label header>Admin</q-item-label>
-        <q-item clickable exact to="/connexion">
+        <q-item clickable exact to="/manage-users">
           <q-item-section avatar>
             <q-icon name="manage_accounts" />
           </q-item-section>
@@ -93,7 +93,7 @@
             <q-item-label>Gestion utilisateurs</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item clickable exact to="/connexion">
+        <q-item clickable exact to="/manage-sensors">
           <q-item-section avatar>
             <q-icon name="settings" />
           </q-item-section>
@@ -101,7 +101,7 @@
             <q-item-label>Gestion capteurs</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item clickable exact to="/connexion">
+        <q-item clickable exact to="/manage-rooms">
           <q-item-section avatar>
             <q-icon name="room_preferences" />
           </q-item-section>

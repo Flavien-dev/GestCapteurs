@@ -25,14 +25,10 @@ Actions : méthodes du magasin qui font appel aux mutations
 Elles peuvent être asynchrones !
  */
 const actions = {
-  enregistrerUtilisateur ({ commit, dispatch }, payload) {
-    const that = this
+  enregistrerUtilisateur ({ commit }, payload) {
     api.post('/newuser', payload)
       .then(function (response) {
-        commit('setUser', response.data.user)
-        commit('setToken', response.data.access_token)
-        console.log(response)
-        that.$router.push('/')
+        console.log('CREATION OK', response)
       })
       .catch(function (error) {
         console.log(error.response)

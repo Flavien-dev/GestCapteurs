@@ -43,6 +43,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+
 export default {
   name: 'EnregistrementForm.vue',
   data () {
