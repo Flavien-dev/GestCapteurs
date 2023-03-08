@@ -1,7 +1,6 @@
 /* eslint-disable quote-props,quotes */
 // Importation d'Axios sous le nom api
 import { api } from 'boot/axios'
-import { Loading } from "quasar"
 
 // State : données du magasin
 const state = {
@@ -21,10 +20,6 @@ const mutations = {
    */
   SET_ROOMS (state, newRooms) {
     state.rooms = newRooms
-  },
-  AJOUTER_SALLE (state, salle) {
-    // Ajout de la tâche à fin du tableau
-    state.rooms.push(salle)
   }
 }
 /*
@@ -32,25 +27,6 @@ Actions : méthodes du magasin qui font appel aux mutations
 Elles peuvent être asynchrones !
  */
 const actions = {
-  ajouterSalle ({ commit, rootState }, room) {
-    Loading.show()
-    // Configuration du header avec token
-    const config = {
-      headers: { Authorization: 'Bearer ' + rootState.auth.token }
-    }
-
-    // ajoute la tâche dans l'API
-    api.post('/salles', room, config)
-      .then(function (response) {
-        // Ajoute la tache retournée par l'API au magasin
-        commit('AJOUTER_SALLE', response.data)
-      })
-      .catch(function (error) {
-        console.log(error)
-        throw error
-      })
-      .finally(Loading.hide())
-  },
   getRoomsApi ({ commit, rootState }) {
     const config = {
       headers: { Authorization: 'Bearer ' + rootState.auth.token }
@@ -62,6 +38,54 @@ const actions = {
         commit('SET_ROOMS', response.data)
       })
       // En cas d'erreur, stoppe le script et affiche le message dans la console
+      .catch(function (error) {
+        throw error
+      })
+  },
+  ajouterSalle ({ commit, rootState }, room) {
+    const config = {
+      headers: { Authorization: 'Bearer ' + rootState.auth.token }
+    }
+
+    // ajoute la tâche dans l'API
+    api.post('/salles', room, config)
+      .then(function (response) {
+        // Ajoute la tache retournée par l'API au magasin
+        console.log('CREATION DE SALLE OK', response)
+        location.reload()
+      })
+      .catch(function (error) {
+        console.log(error)
+        throw error
+      })
+  },
+  modifierSalle ({ commit, rootState }, payload) {
+    // Configuration du header avec token
+    const config = {
+      headers: { Authorization: 'Bearer ' + rootState.auth.token }
+    }
+
+    // modifie une tâche dans l'API
+    api.put('/salles/' + payload.id, payload.updates, config)
+      .then(function (response) {
+        console.log('MODIFICATION DE SALLE OK', response)
+        location.reload()
+      })
+      .catch(function (error) {
+        throw error
+      })
+  },
+  supprimerSalle ({ commit, rootState }, id) {
+    // Configuration du header avec token
+    const config = {
+      headers: { Authorization: 'Bearer ' + rootState.auth.token }
+    }
+    // supprime la tâche dans l'API
+    api.delete('/salles/' + id, config)
+      .then(function (response) {
+        console.log('SUPPRESSION DE SALLE OK', response)
+        location.reload()
+      })
       .catch(function (error) {
         throw error
       })

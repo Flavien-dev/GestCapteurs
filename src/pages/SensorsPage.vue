@@ -1,6 +1,11 @@
 <template>
   <q-page padding>
     <h3>Capteurs</h3>
+    <q-btn
+      to="/add-user"
+      icon-right="account_circle"
+      label="Ajouter des utilisateurs"
+    />
     <q-list
       v-if="sensors.length"
       class="rounded-borders"

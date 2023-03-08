@@ -7,19 +7,21 @@
       color="primary"
       v-close-popup/>
     <p></p>
-    <q-list
-      v-if="rooms.length"
-      class="rounded-borders"
-      bordered
-      separator
-    >
-      <room
-        v-for="room of rooms"
-        :key="room.id"
-        :room="room"
-      />
-    </q-list>
-    <p v-else>Pas de salles...</p>
+    <q-pull-to-refresh @refresh="refresh">
+      <q-list
+        v-if="rooms.length"
+        class="rounded-borders"
+        bordered
+        separator
+      >
+        <adminRoom
+          v-for="room of rooms"
+          :key="room.id"
+          :room="room"
+        />
+      </q-list>
+      <p v-else>Pas de salles...</p>
+    </q-pull-to-refresh>
     <q-dialog
       v-model="afficheFormNewRoom">
       <form-new-room @close="afficheFormNewRoom = false"/>
@@ -29,17 +31,18 @@
 
 <script>
 import { mapActions } from 'vuex'
-import Room from 'components/admin/AdminRooms.vue'
+import adminRoom from 'components/admin/AdminRooms.vue'
 
 export default {
   name: 'ManageRoomsPage.vue',
   components: {
-    Room,
+    adminRoom,
     'form-new-room': require('components/action/creeSalle.vue').default
   },
   data () {
     return {
-      afficheFormNewRoom: false
+      afficheFormNewRoom: false,
+      afficheFormModifRoom: false
     }
   },
   computed: {

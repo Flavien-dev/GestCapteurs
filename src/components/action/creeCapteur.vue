@@ -1,16 +1,38 @@
 <template>
   <q-card class="form-card">
     <q-card-section>
-      <div class="text-h6 heading">Ajouter salle</div>
+      <div class="text-h6 heading">Ajouter capteur</div>
     </q-card-section>
 
     <q-card-section>
-
       <div class="row q-mb-md">
         <q-input
           filled
           v-model="capteur.nom"
           label="Nom"
+          class="col"/>
+      </div>
+
+    </q-card-section>
+
+    <q-card-section>
+      <div class="row q-mb-md">
+        <q-input
+          filled
+          v-model="capteur.code"
+          label="Code"
+          class="col"/>
+      </div>
+
+    </q-card-section>
+
+    <q-card-section>
+      <div class="row q-mb-md">
+        <q-input
+          type="number"
+          filled
+          v-model="capteur.salle_id"
+          label="Code"
           class="col"/>
       </div>
 
@@ -48,12 +70,12 @@ export default {
   // appel des méthodes
   methods: {
     // appel des actions qui seront utilisées
-    ...mapActions('rooms', ['ajouterSalle']),
+    ...mapActions('sensors', ['ajouterCapteur']),
     /**
      * permet de gérer l'envoi du formulaire
      */
     formSubmit () {
-      this.ajouterSalle(this.salle)
+      this.ajouterCapteur(this.capteur)
 
       this.$emit('fermer')
     }

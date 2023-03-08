@@ -1,7 +1,7 @@
 <template>
   <q-card class="form-card">
     <q-card-section>
-      <div class="text-h6 heading">Ajouter salle</div>
+      <div class="text-h6 heading">Modifier salle</div>
     </q-card-section>
 
     <q-card-section>
@@ -34,7 +34,8 @@
 import { mapActions } from 'vuex'
 
 export default {
-  name: 'creeSalle.vue',
+  name: 'modifieSalle.vue',
+  props: ['salleAModifier'],
   data () {
     return {
       salle: {
@@ -44,18 +45,22 @@ export default {
   },
   // appel des méthodes
   methods: {
-    // appel des actions qui seront utilisées
-    ...mapActions('rooms', ['ajouterSalle']),
-    /**
-     * permet de gérer l'envoi du formulaire
-     */
+    ...mapActions('rooms', ['modifierSalle']),
     formSubmit () {
-      this.ajouterSalle(this.salle)
-
-      this.$emit('fermer')
+      const payload = {
+        id: this.salle.id,
+        updates: this.salle
+      }
+      this.modifierSalle(payload)
     }
   },
-  mounted () {}
+  mounted () {
+    // vérifie si l'action voulue de l'utilisateur est de modifier un plat
+    if (this.salleAModifier) {
+      // Copie les propriétés de platAModifier dans un nouvel objet vide
+      this.salle = Object.assign({}, this.salleAModifier)
+    }
+  }
 }
 </script>
 

@@ -33,13 +33,16 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'changeMDP.vue',
   data () {
     return {
       compte: {
+        nom: '',
+        prenom: '',
+        email: '',
         mdp: ''
       }
     }
@@ -48,6 +51,9 @@ export default {
     mdpAChanger: {
       type: Object
     }
+  },
+  computed: {
+    ...mapState('auth', ['user'])
   },
   // appel des méthodes
   methods: {

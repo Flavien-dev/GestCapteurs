@@ -49,20 +49,51 @@ const actions = {
   viderSensors ({ commit }) {
     commit('SET_SENSORS', [])
   },
-  ajouterSalle ({ commit, rootState }, room) {
-    // Configuration du header avec token
+  ajouterCapteur ({ commit, rootState }, sensor) {
     const config = {
       headers: { Authorization: 'Bearer ' + rootState.auth.token }
     }
 
     // ajoute la tâche dans l'API
-    api.post('/capteur', room, config)
+    api.post('/capteurs', sensor, config)
       .then(function (response) {
         // Ajoute la tache retournée par l'API au magasin
-        commit('SET_SENSORS', response.data)
+        console.log('CREATION DE CAPTEUR OK', response)
+        location.reload()
       })
       .catch(function (error) {
         console.log(error)
+        throw error
+      })
+  },
+  modifierCapteur ({ commit, rootState }, payload) {
+    // Configuration du header avec token
+    const config = {
+      headers: { Authorization: 'Bearer ' + rootState.auth.token }
+    }
+
+    // modifie une tâche dans l'API
+    api.put('/capteurs/' + payload.id, payload.updates, config)
+      .then(function (response) {
+        console.log('MODIFICATION DE CAPTEUR OK', response)
+        location.reload()
+      })
+      .catch(function (error) {
+        throw error
+      })
+  },
+  supprimerCapteur ({ commit, rootState }, id) {
+    // Configuration du header avec token
+    const config = {
+      headers: { Authorization: 'Bearer ' + rootState.auth.token }
+    }
+    // supprime la tâche dans l'API
+    api.delete('/capteurs/' + id, config)
+      .then(function (response) {
+        console.log('SUPPRESSION DE CAPTEUR OK', response)
+        location.reload()
+      })
+      .catch(function (error) {
         throw error
       })
   },

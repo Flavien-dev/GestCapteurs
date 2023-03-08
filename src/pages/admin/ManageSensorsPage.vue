@@ -1,6 +1,12 @@
 <template>
   <q-page padding>
     <h3>Capteurs</h3>
+    <q-btn
+      @click="afficheFormNewSensor = true"
+      label="Ajouter une nouvelle salle"
+      color="primary"
+      v-close-popup/>
+    <p></p>
     <q-list
       v-if="sensors.length"
       class="rounded-borders"
@@ -14,6 +20,10 @@
       />
     </q-list>
     <p v-else>Pas de capteurs</p>
+    <q-dialog
+      v-model="afficheFormNewSensor">
+      <form-new-sensor @close="afficheFormNewSensor = false"/>
+    </q-dialog>
   </q-page>
 </template>
 
@@ -23,7 +33,15 @@ import Sensor from 'components/admin/AdminSensors.vue'
 
 export default {
   name: 'ManageSensorsPage.vue',
-  components: { Sensor },
+  data () {
+    return {
+      afficheFormNewSensor: false
+    }
+  },
+  components: {
+    Sensor,
+    'form-new-sensor': require('components/action/creeCapteur.vue').default
+  },
   computed: {
     sensors () {
       return this.$store.getters['sensors/getSensors']
