@@ -3,7 +3,7 @@
     <h3>Capteurs</h3>
     <q-btn
       @click="afficheFormNewSensor = true"
-      label="Ajouter une nouvelle salle"
+      label="Ajouter un nouveau capteur"
       color="primary"
       v-close-popup/>
     <p></p>
@@ -33,14 +33,15 @@ import Sensor from 'components/admin/AdminSensors.vue'
 
 export default {
   name: 'ManageSensorsPage.vue',
-  data () {
-    return {
-      afficheFormNewSensor: false
-    }
-  },
   components: {
     Sensor,
-    'form-new-sensor': require('components/action/creeCapteur.vue').default
+    'form-new-sensor': require('components/action/capteur/creeCapteur.vue').default
+  },
+  data () {
+    return {
+      afficheFormNewSensor: false,
+      afficheFormModifSensor: false
+    }
   },
   computed: {
     sensors () {

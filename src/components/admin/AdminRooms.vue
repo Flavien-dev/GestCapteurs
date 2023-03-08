@@ -45,7 +45,7 @@ export default {
     }
   },
   components: {
-    'form-modif-room': require('components/action/modifieSalle.vue').default
+    'form-modif-room': require('components/action/salle/modifieSalle.vue').default
   },
   props: {
     // La propriété room est obligatoire et doit être de type Object

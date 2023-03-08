@@ -6,6 +6,7 @@
       icon-right="account_circle"
       label="Ajouter des utilisateurs"
     />
+    <p/>
     <q-list
       v-if="sensors.length"
       class="rounded-borders"

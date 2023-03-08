@@ -7,7 +7,7 @@
       color="primary"
       v-close-popup/>
     <p></p>
-    <q-pull-to-refresh @refresh="refresh">
+    <q-pull-to-refresh>
       <q-list
         v-if="rooms.length"
         class="rounded-borders"
@@ -37,7 +37,7 @@ export default {
   name: 'ManageRoomsPage.vue',
   components: {
     adminRoom,
-    'form-new-room': require('components/action/creeSalle.vue').default
+    'form-new-room': require('components/action/salle/creeSalle.vue').default
   },
   data () {
     return {
