@@ -6,6 +6,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+import { LocalStorage } from 'quasar'
 
 export default {
   name: 'App',
@@ -13,6 +14,7 @@ export default {
     ...mapActions('auth', ['setUser'])
   },
   mounted () {
+    LocalStorage.set('favoris', [])
     // Récupère les données du localStorage
     const user = this.$q.localStorage.getItem('user')
     const token = this.$q.localStorage.getItem('token')

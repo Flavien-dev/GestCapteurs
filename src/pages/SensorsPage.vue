@@ -24,6 +24,11 @@ import Sensor from 'components/Sensor.vue'
 export default {
   name: 'SensorsPage.vue',
   components: { Sensor },
+  data () {
+    return {
+      favoris: []
+    }
+  },
   computed: {
     sensors () {
       return this.$store.getters['sensors/getSensors']

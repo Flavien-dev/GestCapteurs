@@ -13,36 +13,6 @@
         Salle : {{ sensor.salle.nom }}
       </q-item-label>
     </q-item-section>
-    <q-item-section side>
-      <q-btn v-if="ajouterFavoris"
-        @click="toFavorites"
-        dense
-        flat
-        round
-        color="primary"
-        icon="star" />
-      <q-btn v-else
-        @click="toFavorites"
-        dense
-        flat
-        round
-        color="primary"
-        icon="star_border" />
-    </q-item-section>
-    <q-item-section side>
-      <q-btn v-if="afficherListe"
-             @click="afficherListe = !afficherListe"
-             dense
-             flat
-             round
-             icon="north" />
-      <q-btn v-else
-             @click="afficherListe = !afficherListe"
-             dense
-             flat
-             round
-             icon="south" />
-    </q-item-section>
   </q-item>
   <div v-if="afficherListe">
     <q-item v-for="mesure in sensor.mesures" :key="mesure.id" :mesure="mesure">
@@ -75,10 +45,8 @@
 
 <script>
 
-import { mapActions } from 'vuex'
-
 export default {
-  name: 'Sensor',
+  name: 'favoritesSensors',
   data () {
     return {
       afficherListe: false,
@@ -90,19 +58,6 @@ export default {
     sensor: {
       type: Object,
       required: true
-    }
-  },
-  methods: {
-    ...mapActions('favorites', ['ajouterFavorites']),
-    toFavorites () {
-      if (this.ajouterFavoris) {
-        this.ajouterFavoris = false
-        console.log(this.sensor)
-        this.ajouterFavorites(this.sensor)
-      } else {
-        this.ajouterFavoris = true
-        console.log(this.sensor)
-      }
     }
   }
 }

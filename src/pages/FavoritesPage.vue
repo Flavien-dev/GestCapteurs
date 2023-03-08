@@ -2,40 +2,42 @@
   <q-page padding>
     <h3>Favoris</h3>
     <q-list
-      v-if="sensors.length"
+      v-if="favoris.length"
       class="rounded-borders"
       bordered
       separator
     >
       <sensor
-        v-for="sensor of sensors"
-        :key="sensor.id"
-        :sensor="sensor"
+        v-for="favorite of favoris"
+        :key="favorite.id"
+        :favorite="favorite"
       />
     </q-list>
-    <p v-else>Pas de capteurs</p>
+    <p>Pas de favoris</p>
+    <q-btn
+      @click="afficherFavori"
+      type="submit"
+      color="primary"
+      label="favoris"
+    />
   </q-page>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-import Sensor from 'components/Sensor.vue'
+import Sensor from 'components/favoritesSensors.vue'
 
 export default {
   name: 'FavoritesPage.vue',
   components: { Sensor },
-  computed: {
-    sensors () {
-      return this.$store.getters['sensors/getSensors']
+  methods: {
+    afficherFavori () {
+      console.log(this.$q.localStorage.getItem('favorites'))
     }
   },
-  methods: {
-    // Donne accès à l'action getClientsApi() du magasin Clients
-    ...mapActions('sensors', ['getSensorsApi'])
-  },
-  // Après que le composant soit construit
-  mounted () {
-    this.getSensorsApi()
+  computed: {
+    favoris () {
+      return this.$store.getters['favorites/getFavorites']
+    }
   }
 }
 </script>

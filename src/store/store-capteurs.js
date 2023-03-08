@@ -1,12 +1,12 @@
 /* eslint-disable quote-props,quotes */
 // Importation d'Axios sous le nom api
 import { api } from 'boot/axios'
-import { Loading } from "quasar"
 
 // State : données du magasin
 const state = {
   // Tableau des clients
-  sensors: []
+  sensors: [],
+  favorites: []
 }
 
 /*
@@ -21,6 +21,9 @@ const mutations = {
    */
   SET_SENSORS (state, newSensors) {
     state.sensors = newSensors
+  },
+  SET_FAVORITES (state, newFavorites) {
+    state.favorites = newFavorites
   }
 }
 /*
@@ -47,23 +50,36 @@ const actions = {
     commit('SET_SENSORS', [])
   },
   ajouterSalle ({ commit, rootState }, room) {
-    Loading.show()
     // Configuration du header avec token
     const config = {
       headers: { Authorization: 'Bearer ' + rootState.auth.token }
     }
 
     // ajoute la tâche dans l'API
-    api.post('/capteurs', room, config)
+    api.post('/capteur', room, config)
       .then(function (response) {
         // Ajoute la tache retournée par l'API au magasin
-        commit('AJOUTER_SALLE', response.data)
+        commit('SET_SENSORS', response.data)
       })
       .catch(function (error) {
         console.log(error)
         throw error
       })
-      .finally(Loading.hide())
+  },
+  ajouterAuxFavoris ({ commit }, favori) {
+    let uId = 1
+    // Si le tableau contient des éléments
+    if (state.favorites.length) {
+      // Récupère l'id MAX et lui ajoute 1
+      uId = Math.max(...state.favorites.map(favori => favori.id)) + 1
+    }
+    // Ajoute le nouvel id au plat
+    favori.id = uId
+    // Commite l'ajout
+    commit('AJOUTER_FAVORI', favori)
+  },
+  supprimerDesFavoris ({ commit }, id) {
+    commit('SUPPRIMER_FAVORI', id)
   }
 }
 
@@ -84,6 +100,10 @@ const getters = {
         .localeCompare((b.name.last + b.name.first), 'fr')
     )
     */
+  },
+
+  getFavorites: function (state) {
+    return state.favorites
   }
 }
 
