@@ -33,10 +33,13 @@
 </template>
 
 <script>
+// importation des actions et des états du magasin
 import { mapActions, mapState } from 'vuex'
 
 export default {
+  // nom de la fenêtre
   name: 'changeMDP.vue',
+  // données permettant la modification d'un compte
   data () {
     return {
       compte: {
@@ -47,11 +50,13 @@ export default {
       }
     }
   },
+  // donnée qui permet de récupérer le mot de passe
   props: {
     mdpAChanger: {
       type: Object
     }
   },
+  // appel des états de l'application concèrnant l'utilisateur connecté
   computed: {
     ...mapState('auth', ['user'])
   },
@@ -63,19 +68,20 @@ export default {
      * permet de gérer l'envoi du formulaire
      */
     formSubmit () {
+      // récupère les modifications attribuées au compte
       const payload = {
         updates: this.account
       }
-      // change les données du plat
+      // change le mot de passe de l'utilisateur
       this.modifierMDP(payload)
       // ferme le formulaire
       this.$emit('close')
     }
   },
   mounted () {
-    // vérifie si l'action voulue de l'utilisateur est de modifier un plat
+    // vérifie si l'action voulue de l'utilisateur est de modifier son mot de passe
     if (this.mdpAChanger) {
-      // Copie les propriétés de platAModifier dans un nouvel objet vide
+      // Copie les propriétés de mdpAModifier dans un nouvel objet vide
       this.account = Object.assign({}, this.mdpAChanger)
     }
   }
