@@ -43,11 +43,15 @@
 </template>
 
 <script>
+// importe les actions du magasin
 import { mapActions } from 'vuex'
 
 export default {
+  // nom de la fenêtre
   name: 'modifieCapteur.vue',
+  // permet de récupérer les données du capteur à modifier
   props: ['capteurAModifier'],
+  // données que retourne un capteur
   data () {
     return {
       sensor: {
@@ -58,19 +62,25 @@ export default {
   },
   // appel des méthodes
   methods: {
+    // appel de la métode de modification d'un capteur
     ...mapActions('sensors', ['modifierCapteur']),
+    /**
+     * permet de gérer l'envoi du formulaire
+     */
     formSubmit () {
+      // contient la modification des données
       const payload = {
         id: this.sensor.id,
         updates: this.sensor
       }
+      // modifie les données du capteur
       this.modifierCapteur(payload)
     }
   },
   mounted () {
-    // vérifie si l'action voulue de l'utilisateur est de modifier un plat
+    // vérifie si l'action voulue de l'utilisateur est de modifier un capteur
     if (this.capteurAModifier) {
-      // Copie les propriétés de platAModifier dans un nouvel objet vide
+      // Copie les propriétés de capteurAModifier dans un nouvel objet vide
       this.sensor = Object.assign({}, this.capteurAModifier)
     }
   }

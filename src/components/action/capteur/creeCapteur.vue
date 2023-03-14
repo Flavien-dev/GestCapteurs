@@ -56,7 +56,9 @@
 import { mapActions } from 'vuex'
 
 export default {
+  // nom de la fenêtre
   name: 'creeCapteur.vue',
+  // donnée d'un capteur
   data () {
     return {
       capteur: {
@@ -69,12 +71,13 @@ export default {
   },
   // appel des méthodes
   methods: {
-    // appel des actions qui seront utilisées
+    // appel de l'action ajouterCapteur
     ...mapActions('sensors', ['ajouterCapteur']),
     /**
      * permet de gérer l'envoi du formulaire
      */
     formSubmit () {
+      // ajoute un capteur à l'API
       this.ajouterCapteur(this.capteur)
 
       this.$emit('fermer')

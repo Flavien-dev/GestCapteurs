@@ -31,11 +31,15 @@
 </template>
 
 <script>
+// importation des actions du magasin
 import { mapActions } from 'vuex'
 
 export default {
+  // nom de la fenêtre
   name: 'modifieSalle.vue',
+  // donnée de la salle à modifier
   props: ['salleAModifier'],
+  // données nécessaire à la modification d'une salle
   data () {
     return {
       salle: {
@@ -45,19 +49,25 @@ export default {
   },
   // appel des méthodes
   methods: {
+    // méthode qui permet de modifier une salle
     ...mapActions('rooms', ['modifierSalle']),
+    /**
+     * permet de gérer l'envoi d'un formulaire
+     */
     formSubmit () {
+      // données modifiées de ma salle
       const payload = {
         id: this.salle.id,
         updates: this.salle
       }
+      // affecte les modifications à la salle
       this.modifierSalle(payload)
     }
   },
   mounted () {
-    // vérifie si l'action voulue de l'utilisateur est de modifier un plat
+    // vérifie si l'action voulue de l'utilisateur est de modifier une salle
     if (this.salleAModifier) {
-      // Copie les propriétés de platAModifier dans un nouvel objet vide
+      // Copie les propriétés de salleAModifier dans un nouvel objet vide
       this.salle = Object.assign({}, this.salleAModifier)
     }
   }

@@ -70,19 +70,33 @@
         </q-item-label>
       </q-item-section>
     </q-item>
+    <q-item v-if="user.is_admin">
+      <q-item-section>
+        <q-btn
+          @click="afficheFormNewMesure = true"
+          label="Ajouter une nouvelle mesure"
+          color="primary"
+          v-close-popup/>
+      </q-item-section>
+    </q-item>
+    <q-dialog
+      v-model="afficheFormNewMesure">
+      <form-new-measure @close="afficheFormNewMesure = false"/>
+    </q-dialog>
   </div>
 </template>
 
 <script>
 
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'Sensor',
   data () {
     return {
       afficherListe: false,
-      ajouterFavoris: false
+      ajouterFavoris: false,
+      afficheFormNewMesure: false
     }
   },
   props: {
@@ -104,6 +118,12 @@ export default {
         console.log(this.sensor)
       }
     }
+  },
+  components: {
+    'form-new-measure': require('components/action/mesure/creeMesure.vue').default
+  },
+  computed: {
+    ...mapState('auth', ['user'])
   }
 }
 </script>

@@ -31,10 +31,13 @@
 </template>
 
 <script>
+// importation des actions du magasin
 import { mapActions } from 'vuex'
 
 export default {
+  // nom de la fenêtre
   name: 'creeSalle.vue',
+  // donnée de création de salle
   data () {
     return {
       salle: {
@@ -44,14 +47,14 @@ export default {
   },
   // appel des méthodes
   methods: {
-    // appel des actions qui seront utilisées
+    // appel de l'actions qui permet d'ajouter une salle
     ...mapActions('rooms', ['ajouterSalle']),
     /**
      * permet de gérer l'envoi du formulaire
      */
     formSubmit () {
+      // ajoute une salle à l'API
       this.ajouterSalle(this.salle)
-
       this.$emit('fermer')
     }
   },

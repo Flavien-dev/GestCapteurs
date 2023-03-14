@@ -32,13 +32,30 @@ const actions = {
       headers: { Authorization: 'Bearer ' + rootState.auth.token }
     }
     // GET
-    api.get('/capteurs', config)
+    api.get('/mesures', config)
       // En cas de succès met à jour le tableau des clients du magasin
       .then(function (response) {
         commit('SET_MEASURES', response.data)
       })
       // En cas d'erreur, stoppe le script et affiche le message dans la console
       .catch(function (error) {
+        throw error
+      })
+  },
+  ajouterMesure ({ commit, rootState }, mesure) {
+    const config = {
+      headers: { Authorization: 'Bearer ' + rootState.auth.token }
+    }
+
+    // ajoute la tâche dans l'API
+    api.post('/mesures', mesure, config)
+      .then(function (response) {
+        // Ajoute la tache retournée par l'API au magasin
+        console.log('CREATION DE MESURE OK', response)
+        location.reload()
+      })
+      .catch(function (error) {
+        console.log(error)
         throw error
       })
   }

@@ -2,6 +2,7 @@ import { boot } from 'quasar/wrappers'
 import axios from 'axios'
 
 const api = axios.create({
+  // URL de l'api à utiliser
   baseURL: 'https://tempapi.divtec.me/api',
   timeout: 3000,
   headers: {
