@@ -169,31 +169,22 @@ const linksList = [
 ]
 
 export default defineComponent({
+  // nom du layout
   name: 'MainLayout',
+  // données utiles de la page
   data () {
     return {
       isAdmin: false
     }
   },
-  components: {
-  },
   computed: {
+    // retourne les données de l'utilisateur connecté
     ...mapState('auth', ['user'])
   },
+  // appel des méthodes
   methods: {
+    // appel de l'action de déconnexion d'un utilisateur
     ...mapActions('auth', ['deconnecterUtilisateur'])
-  },
-
-  setup () {
-    const leftDrawerOpen = ref(false)
-
-    return {
-      essentialLinks: linksList,
-      leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
-    }
   }
 })
 </script>
