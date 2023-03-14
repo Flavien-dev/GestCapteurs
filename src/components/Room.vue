@@ -20,7 +20,9 @@
 import { mapActions } from 'vuex'
 
 export default {
+  // nom de la fenêtre
   name: 'Room.vue',
+  // données de la propriété room
   props: {
     // La propriété room est obligatoire et doit être de type Object
     room: {
@@ -28,13 +30,20 @@ export default {
       required: true
     }
   },
+  // appel des méthodes
   methods: {
+    // appel de l'action de modification des salles
     ...mapActions('rooms', ['modifierSalle']),
+    /**
+     * modifie une salle
+     */
     modifierSalle () {
+      // modifications apportées à la salle
       const payload = {
         id: this.salle.id,
         updates: this.salle
       }
+      // modification de la salle
       this.modifierSalle(payload)
     }
   }

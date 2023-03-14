@@ -91,23 +91,33 @@
 import { mapActions, mapState } from 'vuex'
 
 export default {
+  // nom de la fenêtre
   name: 'Sensor',
+  // données de la page
   data () {
     return {
+      // affiche la liste des capteurs
       afficherListe: false,
+      // ajoute un capteur au favori
       ajouterFavoris: false,
+      // affiche le formulaire pour ajouter un mesure
       afficheFormNewMesure: false
     }
   },
   props: {
-    // La propriété client est obligatoire et doit être de type Object
+    // La propriété sensor est obligatoire et doit être de type Object
     sensor: {
       type: Object,
       required: true
     }
   },
+  // appel des méthodes
   methods: {
+    // appel de l'action d'ajout aux favoris
     ...mapActions('favorites', ['ajouterFavorites']),
+    /**
+     * ajoute aux favoris selon l'état de l'étoile des favoris (bouton)
+     */
     toFavorites () {
       if (this.ajouterFavoris) {
         this.ajouterFavoris = false
@@ -119,9 +129,12 @@ export default {
       }
     }
   },
+  // importation des composants utiles
   components: {
+    // formulaire d'ajout de mesures
     'form-new-measure': require('components/action/mesure/creeMesure.vue').default
   },
+  // permet de récupérer les données de l'utilisateur connecté
   computed: {
     ...mapState('auth', ['user'])
   }

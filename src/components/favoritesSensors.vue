@@ -46,15 +46,18 @@
 <script>
 
 export default {
+  // nom de la fenêtre
   name: 'favoritesSensors',
+  // données de la fenêtre
   data () {
     return {
-      afficherListe: false,
-      ajouterFavoris: false
+      // affiche la liste des favoris
+      afficherListe: false
     }
   },
+  // données qui permettent de récupérer un favori
   props: {
-    // La propriété client est obligatoire et doit être de type Object
+    // La propriété sensor est obligatoire et doit être de type Object
     sensor: {
       type: Object,
       required: true

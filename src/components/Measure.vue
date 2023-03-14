@@ -13,9 +13,11 @@
 
 <script>
 export default {
+  // nom de la page
   name: 'Measure.vue',
+  // donnée d'une mesure
   props: {
-    // La propriété client est obligatoire et doit être de type Object
+    // La propriété measure est obligatoire et doit être de type Object
     measure: {
       type: Object,
       required: true
