@@ -39,16 +39,22 @@
 </template>
 
 <script>
+// importation des actions du magasin
 import { mapActions } from 'vuex'
 
 export default {
+  // nom de la fenêtre
   name: 'AdminSensor.vue',
+  // données de la fenêter
   data () {
     return {
+      // permet de savoir si l'administrateur veut modifier un capteur ou pas
       afficheFormModifCapteur: false
     }
   },
+  // importation des composants à utiliser dans cette fenêtre
   components: {
+    // formulaire de modification de capteur
     'form-modif-capteur': require('components/action/capteur/modifieCapteur.vue').default
   },
   props: {
