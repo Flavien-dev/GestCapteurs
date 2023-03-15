@@ -20,14 +20,15 @@ import auth from './store-auth'
  */
 
 export default store(function (/* { ssrContext } */) {
+  // magasin du site
   const Store = createStore({
     modules: {
-      sensors,
-      rooms,
-      measures,
-      account,
-      favorites,
-      auth
+      sensors, // magasin des capteurs
+      rooms, // magasin des salles
+      measures, // magasin des mesures
+      account, // magasin du compte
+      favorites, // magasin du site
+      auth // magasin de l'authentification
     },
 
     // enable strict mode (adds overhead!)
