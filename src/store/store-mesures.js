@@ -4,7 +4,7 @@ import { api } from 'boot/axios'
 
 // State : données du magasin
 const state = {
-  // Tableau des clients
+  // Tableau des mesures
   measures: []
 }
 
@@ -27,13 +27,18 @@ Actions : méthodes du magasin qui font appel aux mutations
 Elles peuvent être asynchrones !
  */
 const actions = {
+  /**
+   * renvoie toutes les mesures de l'API
+   * @param commit valide l'envoi
+   * @param rootState données d'authentification de l'utilisateur
+   */
   getMeasuresApi ({ commit, rootState }) {
     const config = {
       headers: { Authorization: 'Bearer ' + rootState.auth.token }
     }
     // GET
     api.get('/mesures', config)
-      // En cas de succès met à jour le tableau des clients du magasin
+      // En cas de succès met à jour le tableau des mesures du magasin
       .then(function (response) {
         commit('SET_MEASURES', response.data)
       })
@@ -47,10 +52,10 @@ const actions = {
       headers: { Authorization: 'Bearer ' + rootState.auth.token }
     }
 
-    // ajoute la tâche dans l'API
+    // ajoute la mesure dans l'API
     api.post('/mesures', mesure, config)
       .then(function (response) {
-        // Ajoute la tache retournée par l'API au magasin
+        // Ajoute la mesure retournée par l'API au magasin
         console.log('CREATION DE MESURE OK', response)
         location.reload()
       })
@@ -68,16 +73,9 @@ Sert à calculer, trier, filtrer ou formater les donneés
  */
 const getters = {
 
-  // Retourne le tableau des clients du magasin trié sur le prénom du client
+  // Retourne le tableau des mesures du magasin
   getMeasures: function (state) {
     return state.measures
-
-    /* Tableau trié par nom et prénom
-    return state.clients.sort(
-      (a, b) => (a.name.last + a.name.first)
-        .localeCompare((b.name.last + b.name.first), 'fr')
-    )
-    */
   }
 }
 
