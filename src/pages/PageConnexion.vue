@@ -25,13 +25,17 @@
 
 <script>
 export default {
+  // nom de la page
   name: 'PageConnexion',
+  // données de la page
   data () {
     return {
       tab: 'connexion'
     }
   },
+  // composant de la page
   components: {
+    // formulaire de connexion
     'cnx-form': require('components/Connexion/ConnexionForm').default
   }
 }
