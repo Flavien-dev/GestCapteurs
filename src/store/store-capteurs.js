@@ -4,7 +4,7 @@ import { api } from 'boot/axios'
 
 // State : données du magasin
 const state = {
-  // Tableau des clients
+  // Tableau des capteurs + favoris
   sensors: [],
   favorites: []
 }
@@ -22,6 +22,12 @@ const mutations = {
   SET_SENSORS (state, newSensors) {
     state.sensors = newSensors
   },
+  /**
+   * Remplace la liste des favoris par un nouveau tableau newFavorites
+   * @param state vieille liste de capteurs
+   * @param newFavorites nouvelles liste
+   * @constructor
+   */
   SET_FAVORITES (state, newFavorites) {
     state.favorites = newFavorites
   }
@@ -31,13 +37,18 @@ Actions : méthodes du magasin qui font appel aux mutations
 Elles peuvent être asynchrones !
  */
 const actions = {
+  /**
+   * retourne tous les capteurs de l'API
+   * @param commit valide les données
+   * @param rootState données d'authentification de l'utilisateur
+   */
   getSensorsApi ({ commit, rootState }) {
     const config = {
       headers: { Authorization: 'Bearer ' + rootState.auth.token }
     }
     // GET
     api.get('/capteurs', config)
-      // En cas de succès met à jour le tableau des clients du magasin
+      // En cas de succès met à jour le tableau des capteurs du magasin
       .then(function (response) {
         commit('SET_SENSORS', response.data)
       })
@@ -46,15 +57,25 @@ const actions = {
         throw error
       })
   },
+  /**
+   * supprime tous les capteurs
+   * @param commit valide la suppression
+   */
   viderSensors ({ commit }) {
     commit('SET_SENSORS', [])
   },
+  /**
+   * ajoute un capteur à l'API
+   * @param commit valide l'ajout du capteur
+   * @param rootState données d'authentification de l'utilisateur
+   * @param sensor capteur à ajouter
+   */
   ajouterCapteur ({ commit, rootState }, sensor) {
     const config = {
       headers: { Authorization: 'Bearer ' + rootState.auth.token }
     }
 
-    // ajoute la tâche dans l'API
+    // ajoute le capteur dans l'API
     api.post('/capteurs', sensor, config)
       .then(function (response) {
         // Ajoute la tache retournée par l'API au magasin
@@ -65,14 +86,21 @@ const actions = {
         console.log(error)
         throw error
       })
+    location.reload()
   },
+  /**
+   * modifie un capteur dans l'API
+   * @param commit valide la modification
+   * @param rootState données d'authentification de l'utilisateur
+   * @param payload données modifiées de l'utilisateur
+   */
   modifierCapteur ({ commit, rootState }, payload) {
     // Configuration du header avec token
     const config = {
       headers: { Authorization: 'Bearer ' + rootState.auth.token }
     }
 
-    // modifie une tâche dans l'API
+    // modifie un capteur dans l'API
     api.put('/capteurs/' + payload.id, payload.updates, config)
       .then(function (response) {
         console.log('MODIFICATION DE CAPTEUR OK', response)
@@ -82,12 +110,18 @@ const actions = {
         throw error
       })
   },
+  /**
+   * supprime un capteur dans l'API
+   * @param commit valide la suppression
+   * @param rootState données d'authentification de l'utilisateur
+   * @param id identifiant de l'utilisateur à supprimer
+   */
   supprimerCapteur ({ commit, rootState }, id) {
     // Configuration du header avec token
     const config = {
       headers: { Authorization: 'Bearer ' + rootState.auth.token }
     }
-    // supprime la tâche dans l'API
+    // supprime le capteur de l'API
     api.delete('/capteurs/' + id, config)
       .then(function (response) {
         console.log('SUPPRESSION DE CAPTEUR OK', response)
@@ -97,6 +131,11 @@ const actions = {
         throw error
       })
   },
+  /**
+   * ajoute un capteur au favoris
+   * @param commit valide l'ajout du capteur
+   * @param favori capteur à ajouter
+   */
   ajouterAuxFavoris ({ commit }, favori) {
     let uId = 1
     // Si le tableau contient des éléments
@@ -104,11 +143,16 @@ const actions = {
       // Récupère l'id MAX et lui ajoute 1
       uId = Math.max(...state.favorites.map(favori => favori.id)) + 1
     }
-    // Ajoute le nouvel id au plat
+    // Ajoute le nouvel id au favori
     favori.id = uId
     // Commite l'ajout
     commit('AJOUTER_FAVORI', favori)
   },
+  /**
+   * supprime le capteur des favoris
+   * @param commit valide la suppression
+   * @param id identifiant du capteur
+   */
   supprimerDesFavoris ({ commit }, id) {
     commit('SUPPRIMER_FAVORI', id)
   }
@@ -121,7 +165,7 @@ Sert à calculer, trier, filtrer ou formater les donneés
  */
 const getters = {
 
-  // Retourne le tableau des clients du magasin trié sur le prénom du client
+  // Retourne le tableau des capteurs du magasin
   getSensors: function (state) {
     return state.sensors
 
@@ -133,6 +177,11 @@ const getters = {
     */
   },
 
+  /**
+   * retourne tous les capteurs ajouter aux favoris
+   * @param state liste des favoris
+   * @returns {[]} la liste des favoris
+   */
   getFavorites: function (state) {
     return state.favorites
   }
