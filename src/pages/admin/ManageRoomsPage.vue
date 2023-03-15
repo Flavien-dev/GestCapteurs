@@ -51,14 +51,17 @@ export default {
     }
   },
   computed: {
+    // retourne les salles stockées dans l'API
     rooms () {
       return this.$store.getters['rooms/getRooms']
     }
   },
+  // appel de l'action qui retourne les salles stockées dans l'API
   methods: {
     ...mapActions('rooms', ['getRoomsApi'])
   },
   mounted () {
+    // retourne les salles stockées dans l'API
     this.getRoomsApi()
   }
 }
