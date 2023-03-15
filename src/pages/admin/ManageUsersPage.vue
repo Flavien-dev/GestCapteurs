@@ -11,6 +11,7 @@
 
 <script>
 export default {
+  // nom de la page
   name: 'ManageUsersPage.vue'
 }
 </script>
