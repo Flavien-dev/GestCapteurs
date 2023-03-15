@@ -19,24 +19,30 @@
 </template>
 
 <script>
+// importation des actions et des composants
 import { mapActions } from 'vuex'
 import Sensor from 'components/Sensor.vue'
 
 export default {
+  // nom de la page
   name: 'SensorsPage.vue',
+  // composant de la page
   components: { Sensor },
+  // données de la page
   data () {
     return {
       favoris: []
     }
   },
   computed: {
+    // renvoie tous les capteurs
     sensors () {
       return this.$store.getters['sensors/getSensors']
     }
   },
+  // appel des méthodes
   methods: {
-    // Donne accès à l'action getClientsApi() du magasin Clients
+    // Donne accès à l'action getSensorsApi() du magasin sensors
     ...mapActions('sensors', ['getSensorsApi'])
   },
   // Après que le composant soit construit
