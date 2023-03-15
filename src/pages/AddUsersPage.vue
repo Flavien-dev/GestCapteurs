@@ -49,9 +49,12 @@
 import { mapActions } from 'vuex'
 
 export default {
+  // nom de la page
   name: 'AddUsersPage.vue',
+  // données utilisées dans la page
   data () {
     return {
+      // données de création d'un utilisateur
       form: {
         prenom: '',
         nom: '',
@@ -61,11 +64,22 @@ export default {
       }
     }
   },
+  // appel des méthodes
   methods: {
+    // appel de l'action de l'enregistrement d'un utilisateur
     ...mapActions('auth', ['enregistrerUtilisateur']),
+    /**
+     * permet d'envoyer le formulaire
+     */
     submitForm () {
+      // enregistre l'utilisateur à l'aide du formulaire
       this.enregistrerUtilisateur(this.form)
     },
+    /**
+     * vérifie si l'email est valide ou pas
+     * @param email email de la personne qui est enregistrée
+     * @returns {boolean} true si l'email est valide, false s'il l'est pas
+     */
     validateEmail (email) {
       // Source : https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
