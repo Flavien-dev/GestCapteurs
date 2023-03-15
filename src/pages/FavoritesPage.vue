@@ -24,17 +24,27 @@
 </template>
 
 <script>
+// importation des capteurs favoris
 import Sensor from 'components/favoritesSensors.vue'
 
 export default {
+  // nom de la page
   name: 'FavoritesPage.vue',
+  // importation du capteur utilisé dans cette page
   components: { Sensor },
+  // appel des méthodes utilisées
   methods: {
+    /**
+     * affiche les capteurs favoris de l'utilisateur connecté
+     */
     afficherFavori () {
       console.log(this.$q.localStorage.getItem('favorites'))
     }
   },
   computed: {
+    /**
+     * retourne tous les capteurs favoris de l'utilisateur
+     */
     favoris () {
       return this.$store.getters['favorites/getFavorites']
     }

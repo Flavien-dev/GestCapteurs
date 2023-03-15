@@ -6,12 +6,15 @@
 </template>
 
 <script>
+// importation des différents éléments du magasin
 import { defineComponent } from 'vue'
 import { mapState } from 'vuex'
 
 export default defineComponent({
+  // nom de la page
   name: 'IndexPage',
   computed: {
+    // données concernant l'utilisateur
     ...mapState('auth', ['user'])
   }
 })
