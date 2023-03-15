@@ -34,11 +34,16 @@ import { mapActions } from 'vuex'
 import adminRoom from 'components/admin/AdminRooms.vue'
 
 export default {
+  // nom de la page
   name: 'ManageRoomsPage.vue',
+  // composants à utiliser dans cette page
   components: {
+    // page d'administration des salles
     adminRoom,
+    // formulaire d'ajout de nouvelles salle
     'form-new-room': require('components/action/salle/creeSalle.vue').default
   },
+  // données utilisées dans cette page
   data () {
     return {
       afficheFormNewRoom: false,
